@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/mainLayout.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="title">#{msg['lbl.cadastro.endereco']}</ui:define>
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam name="enderecoId" value="#{enderecoMB.endereco.id}" />
+			<f:viewAction action="#{enderecoMB.pesquisaEndereco()}" />
+		</f:metadata>
+
+		<h:form prependId="false" styleClass="default-form-width">
+			<p:remoteCommand name="consultaCep" action="#{enderecoMB.consultaCep()}" update=":cep :rua :bairro :cidade :estado" process="@this :cep" />
+
+			<div class="row">
+				<div class="col-md-1">
+					<label for="cep" class="simple-label-position">#{msg['lbl.cep']}</label>
+				</div>
+				<div class="col-md-2">
+					<p:inputText styleClass="form-control" id="cep" placeholder="#{msg['lbl.cep']}" required="true" maxlength="8"
+						requiredMessage="#{msg['msg.validacao.preencher.campo']} #{msg['lbl.cep']}" value="#{enderecoMB.endereco.cep.numero}" onblur="consultaCep()" />
+				</div>
+
+				<div class="col-md-1">
+					<label for="rua" class="simple-label-position">#{msg['lbl.rua']}</label>
+				</div>
+				<div class="col-md-8">
+					<p:inputText styleClass="form-control" id="rua" placeholder="#{msg['lbl.rua']}" required="true" maxlength="200"
+						requiredMessage="#{msg['msg.validacao.preencher.campo']} #{msg['lbl.rua']}" value="#{enderecoMB.endereco.cep.rua}"
+						disabled="#{!empty enderecoMB.endereco.cep.id}" />
+				</div>
+			</div>
+
+			<div class="row row-top">
+				<div class="col-md-1">
+					<label for="bairro" class="simple-label-position">#{msg['lbl.bairro']}</label>
+				</div>
+				<div class="col-md-2">
+					<p:inputText styleClass="form-control" id="bairro" placeholder="#{msg['lbl.bairro']}" value="#{enderecoMB.endereco.cep.bairro}"
+						disabled="#{!empty enderecoMB.endereco.cep.id}" maxlength="100" />
+				</div>
+
+				<div class="col-md-1">
+					<label for="cidade" class="simple-label-position">#{msg['lbl.cidade']}</label>
+				</div>
+				<div class="col-md-2">
+					<p:inputText styleClass="form-control" id="cidade" placeholder="#{msg['lbl.cidade']}" required="true"
+						requiredMessage="#{msg['msg.validacao.preencher.campo']} #{msg['lbl.cidade']}" value="#{enderecoMB.endereco.cep.cidade}"
+						disabled="#{!empty enderecoMB.endereco.cep.id}" maxlength="50" />
+				</div>
+
+				<div class="col-md-1">
+					<label for="estado" class="simple-label-position">#{msg['lbl.estado']}</label>
+				</div>
+				<div class="col-md-1">
+					<p:inputText styleClass="form-control" id="estado" placeholder="#{msg['lbl.estado']}" required="true"
+						requiredMessage="#{msg['msg.validacao.preencher.campo']} #{msg['lbl.estado']}" value="#{enderecoMB.endereco.cep.estado}"
+						disabled="#{!empty enderecoMB.endereco.cep.id}" maxlength="2" />
+				</div>
+			</div>
+
+			<div class="row row-top">
+				<div class="col-md-1">
+					<label for="complemento" class="simple-label-position">#{msg['lbl.complemento']}</label>
+				</div>
+				<div class="col-md-9">
+					<p:inputText styleClass="form-control" id="complemento" placeholder="#{msg['lbl.complemento']}" value="#{enderecoMB.endereco.complemento}" maxlength="100" />
+				</div>
+
+				<div class="col-md-1">
+					<label for="numero" class="simple-label-position">#{msg['lbl.numero']}</label>
+				</div>
+				<div class="col-md-1">
+					<p:inputText styleClass="form-control" id="numero" placeholder="#{msg['lbl.numero']}" required="true" maxlength="9"
+						requiredMessage="#{msg['msg.validacao.preencher.campo']} #{msg['lbl.numero']}" value="#{enderecoMB.endereco.numero}" />
+				</div>
+			</div>
+
+			<div class="row row-top">
+				<div class="col-md-5" />
+				<div class="col-md-1">
+					<p:commandButton value="#{msg['lbl.salvar']}" update="@form" styleClass="btn btn-primary" action="#{enderecoMB.salvaEndereco()}" />
+				</div>
+				<div class="col-md-1">
+					<p:commandButton value="#{msg['lbl.limpar']}" update="@form" process="@this" actionListener="#{enderecoMB.resetComponents()}" action="#{enderecoMB.init()}"
+						styleClass="btn btn-primary" />
+				</div>
+				<div class="col-md-5" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

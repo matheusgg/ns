@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="title">#{msg['lbl.agenda.enderecos']}</ui:insert></title>
+
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="#{resource['css:bootstrap.min.css']}" />
+	<link rel="stylesheet" href="#{resource['css:bootstrap-theme.min.css']}" />
+	<h:outputStylesheet name="styles.css" library="css" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</h:head>
+<h:body>
+
+	<div>
+		<div id="header" class="container-fluid">
+			<ui:include src="header.xhtml" />
+		</div>
+
+		<div id="menu">
+			<ui:include src="menu.xhtml" />
+		</div>
+
+		<div id="messages" class="container-fluid">
+			<p:messages showIcon="false" autoUpdate="true" closable="true" />
+		</div>
+
+		<div id="content">
+			<div class="container-fluid">
+				<ui:insert name="content">#{msg['lbl.conteudo']}</ui:insert>
+			</div>
+		</div>
+
+		<div id="footer" class="container-fluid">
+			<ui:include src="footer.xhtml" />
+		</div>
+	</div>
+
+	<p:ajaxStatus onstart="startLoading()" oncomplete="stopLoading()">
+		<div class="modal-backdrop fade in loading-background hide" id="loadingDiv">
+			<h:graphicImage name="loading.gif" library="img" width="60px" styleClass="loading-background-img" />
+		</div>
+	</p:ajaxStatus>
+
+	<!-- JS -->
+	<h:outputScript name="jquery-1.11.2.min.js" library="js" />
+	<h:outputScript name="jquery-migrate-1.2.1.min.js" library="js" />
+	<h:outputScript name="bootstrap.min.js" library="js" />
+	<h:outputScript name="scripts.js" library="js" />
+</h:body>
+</html>

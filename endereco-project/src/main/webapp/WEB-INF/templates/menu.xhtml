@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li class="#{prettyContext.currentMapping.id eq 'cadastro' ? 'active' : ''}"><h:link outcome="pretty:cadastro" value="#{msg['lbl.cadastrar']}" /></li>
+				<li class="#{prettyContext.currentMapping.id eq 'pesquisa' ? 'active' : ''}"><h:link outcome="pretty:pesquisa" value="#{msg['lbl.pesquisar']}" /></li>
+			</ul>
+		</div>
+	</nav>
+
+</ui:composition>

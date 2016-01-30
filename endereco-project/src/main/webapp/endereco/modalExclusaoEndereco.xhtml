@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<!-- Modal -->
+	<div class="modal fade" id="confirmExclusaoEndereco" tabindex="-1" role="dialog" aria-labelledby="confirmExclusaoEndereco" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="#{msg['lbl.fechar']}">
+						<span aria-hidden="true">x</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">#{msg['lbl.excluir']}</h4>
+				</div>
+				<div class="modal-body">
+					<h:outputFormat value="#{msg['msg.confirmacao.exclusao.endereco']}">
+						<f:param value="#{enderecoMB.endereco.id}" />
+					</h:outputFormat>
+				</div>
+				<div class="modal-footer">
+					<h:commandButton value="#{msg['lbl.sim']}" styleClass="btn btn-primary" action="#{enderecoMB.excluiEndereco()}" pt:data-dismiss="modal">
+						<f:ajax render="@form" />
+					</h:commandButton>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">#{msg['lbl.nao']}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</ui:composition>

@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/mainLayout.xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+	<ui:define name="title">#{msg['lbl.pesquisa.endereco']}</ui:define>
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam name="enderecoId" value="#{enderecoMB.endereco.id}" />
+			<f:viewAction action="#{enderecoMB.pesquisaEndereco()}" />
+		</f:metadata>
+
+		<h:form prependId="false" styleClass="default-form-width">
+			<div class="row">
+				<div class="col-md-2" style="width: 200px;">
+					<label for="idEndereco" class="simple-label-position">#{msg['lbl.informe.id.endereco']}</label>
+				</div>
+				<div class="col-md-1">
+					<p:inputText styleClass="form-control" id="idEndereco" placeholder="#{msg['lbl.id']}" required="true" maxlength="8"
+						requiredMessage="#{msg['msg.validacao.preencher.campo']} #{msg['lbl.id']}" value="#{enderecoMB.endereco.id}" label="#{msg['lbl.endereco']}" />
+				</div>
+				<div class="col-md-1">
+					<p:commandButton update="@form" value="#{msg['lbl.pesquisar']}" styleClass="btn btn-primary" action="#{enderecoMB.pesquisaEndereco()}" />
+				</div>
+				<div class="col-md-1">
+					<p:commandButton value="#{msg['lbl.limpar']}" update="@form" process="@this" actionListener="#{enderecoMB.resetComponents()}" action="#{enderecoMB.init()}"
+						styleClass="btn btn-primary" />
+				</div>
+			</div>
+
+			<div jsf:rendered="#{!empty enderecoMB.endereco.id}">
+				<div class="row row-top">
+					<div class="col-md-2">
+						<label for="cep" class="simple-label-position">#{msg['lbl.cep']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.cep.numero}" />
+					</div>
+
+					<div class="col-md-10">
+						<label for="rua" class="simple-label-position">#{msg['lbl.rua']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.cep.rua}" />
+					</div>
+				</div>
+
+				<div class="row row-top">
+					<div class="col-md-2">
+						<label for="bairro" class="simple-label-position">#{msg['lbl.bairro']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.cep.bairro}" />
+					</div>
+
+					<div class="col-md-2">
+						<label for="cidade" class="simple-label-position">#{msg['lbl.cidade']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.cep.cidade}" />
+					</div>
+
+					<div class="col-md-2">
+						<label for="estado" class="simple-label-position">#{msg['lbl.estado']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.cep.estado}" />
+					</div>
+				</div>
+
+				<div class="row row-top">
+					<div class="col-md-4">
+						<label for="complemento" class="simple-label-position">#{msg['lbl.complemento']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.complemento}" />
+					</div>
+
+					<div class="col-md-2">
+						<label for="numero" class="simple-label-position">#{msg['lbl.numero']}:</label>
+						<h:outputText value=" #{enderecoMB.endereco.numero}" />
+					</div>
+				</div>
+
+				<div class="row row-top">
+					<div class="col-md-1">
+						<button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-primary"
+							data-target="#confirmExclusaoEndereco" data-toggle="modal">
+							<span class="ui-button-text">#{msg['lbl.excluir']}</span>
+						</button>
+					</div>
+					<div class="col-md-1">
+						<p:button outcome="/endereco/cadastro" value="#{msg['lbl.alterar']}" styleClass="btn btn-primary">
+							<f:param name="enderecoId" value="#{enderecoMB.endereco.id}" />
+						</p:button>
+					</div>
+				</div>
+			</div>
+
+			<ui:include src="modalExclusaoEndereco.xhtml" />
+		</h:form>
+	</ui:define>
+</ui:composition>

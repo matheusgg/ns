@@ -1,0 +1,19 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="default">
+		<pattern value="/" />
+		<view-id value="/index.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="cadastro">
+		<pattern value="/cadastro" />
+		<view-id value="/endereco/cadastro.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="pesquisa">
+		<pattern value="/pesquisa" />
+		<view-id value="/endereco/pesquisa.xhtml" />
+	</url-mapping>
+
+</pretty-config>
